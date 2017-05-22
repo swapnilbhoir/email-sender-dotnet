@@ -1,0 +1,30 @@
+body{
+	background-color: #ebeff2;
+}
+
+#ccSection, #bccSection{
+	display: none;
+}
+
+.pageBar{
+	background-color: #333333;
+	color:#ffffff;
+	padding-bottom: 0.7em;
+	margin-bottom: 3em;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.card{
+	padding: 20px;
+    border: 1px solid rgba(54, 64, 74, 0.05);
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    background-clip: padding-box;
+    margin-bottom: 20px;
+    background-color: #ffffff;
+}

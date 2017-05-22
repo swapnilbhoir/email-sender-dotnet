@@ -1,0 +1,8 @@
+E:\test app\EmailSendApi\EmailSendApi\bin\EmailSendApi.dll.config
+E:\test app\EmailSendApi\EmailSendApi\bin\EmailSendApi.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\EmailSendApi.pdb
+E:\test app\EmailSendApi\EmailSendApi\bin\Newtonsoft.Json.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\Newtonsoft.Json.xml
+E:\test app\EmailSendApi\EmailSendApi\obj\Debug\EmailSendApi.csprojResolveAssemblyReference.cache
+E:\test app\EmailSendApi\EmailSendApi\obj\Debug\EmailSendApi.dll
+E:\test app\EmailSendApi\EmailSendApi\obj\Debug\EmailSendApi.pdb
