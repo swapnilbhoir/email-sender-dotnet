@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
+using RestSharp;
+using RestSharp.Authenticators;
+using System.Web.UI.HtmlControls;
 
 namespace EmailSender
 {
@@ -13,13 +16,20 @@ namespace EmailSender
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
-        /*
-        protected async void submit_ServerClick(object sender, EventArgs e)
+     
+        protected async void BtnSubmit_Click(object sender, EventArgs e)
         {
+            Button BtnSendEmail = sender as Button;     
 
-            Button BtnSendEmail = sender as Button;
+         HtmlContainerControl divLoader= this.Master.FindControl("div_loader") as HtmlContainerControl;
+         divLoader.Visible = true;
+
+         HtmlContainerControl divSucess = this.Master.FindControl("div_success") as HtmlContainerControl;
+         divSucess.Visible = false;
+         HtmlContainerControl divFailure = this.Master.FindControl("div_failure") as HtmlContainerControl;
+         divFailure.Visible = false;     
 
             BtnSendEmail.Enabled = false;
 
@@ -27,67 +37,41 @@ namespace EmailSender
             string mailSubject = String.Format("{0}", Request.Form["subjectEmail"]);
             string mailBody = String.Format("{0}", Request.Form["composeEmail"]);
 
-            SendGridEmailRequest request=new SendGridEmailRequest();
-            request.content=new Content();
-            request.content.from="sandbox@sparkpostbox.com";
-            request.content.subject=mailSubject;
-            request.content.text=mailBody;
-
-            request.options=new Options();
-            request.options.sandbox=true;
-
-            string[] Emails=toEmail.Split(',').ToArray();
-
-            if(Emails.Length>=1)
+            if (!await SendSparkPostEmail(toEmail, mailSubject, mailBody))
             {
-                request.recipients=new List<Recipient>();
-
-                for(int i=0;i<Emails.Length;i++)
+                if (!SendMailGunEmail(toEmail, mailSubject, mailBody))
                 {
-                    Recipient receiver=new Recipient();
-                    receiver.address=Emails[i];
-                    request.recipients.Add(receiver);
+                    //failure in sending mail from both email api
+
+                    divLoader.Visible = false;
+                    divFailure.Visible = true;
+                    divSucess.Visible = false;
                 }
-            }
-
-
-            SendGridEmailResponse response = await WebServiceUtil.SendEmailGridApi(request);
-
-            if(response!=null)
-            {
-               if(response.results.total_accepted_recipients==Emails.Length)
-               {
-
-                   string a = "sucess";
-                  // System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE=""JavaScript"">alert("+"Hello this is an Alert"+")+</SCRIPT>");
-               }
-               else
-               {
-
-               }
+                else
+                {
+                    //mail send sucessfully using MailGun
+                    divLoader.Visible = false;
+                    divFailure.Visible = false;
+                    divSucess.Visible = true;
+                }
             }
             else
             {
-
+                //mail send sucessfully using SparkPost
+                divLoader.Visible = false;
+                divFailure.Visible = false;
+                divSucess.Visible = true;
             }
 
-
             BtnSendEmail.Enabled = true;
-            //  Console.WriteLine(((TextBox)this.FindControl("toEmail")).Text);
-        }
+        }     
 
-        */
-        protected async void BtnSubmit_Click(object sender, EventArgs e)
+
+        private async Task<bool> SendSparkPostEmail(string toEmail, string mailSubject, string mailBody)
         {
-            Button BtnSendEmail = sender as Button;
+            bool result = false;
 
-            BtnSendEmail.Enabled = false;
-
-            string toEmail = String.Format("{0}", Request.Form["toEmail"]);
-            string mailSubject = String.Format("{0}", Request.Form["subjectEmail"]);
-            string mailBody = String.Format("{0}", Request.Form["composeEmail"]);
-
-            SendGridEmailRequest request = new SendGridEmailRequest();
+            SendSparkpostEmailRequest request = new SendSparkpostEmailRequest();
             request.content = new Content();
             request.content.from = "sandbox@sparkpostbox.com";
             request.content.subject = mailSubject;
@@ -111,28 +95,37 @@ namespace EmailSender
             }
 
 
-            SendGridEmailResponse response = await WebServiceUtil.SendEmailGridApi(request);
+            SendSparkpostEmailResponse response = await WebServiceUtil.SendEmailSparkPostApi(request);
 
             if (response != null)
             {
                 if (response.results.total_accepted_recipients == Emails.Length)
                 {
-
-                    string a = "sucess";
-                    // System.Web.HttpContext.Current.Response.Write("<SCRIPT LANGUAGE=""JavaScript"">alert("+"Hello this is an Alert"+")+</SCRIPT>");
+                    result = true;
                 }
-                else
-                {
-
-                }
+                
             }
-            else
+
+            return result;
+        }
+
+
+        private bool SendMailGunEmail(string toEmail, string mailSubject, string mailBody)
+        {
+            bool result = false;
+
+            string[] Emails = toEmail.Split(',').ToArray();
+
+            if (Emails.Length >= 1)
             {
-
+                IRestResponse response= MailGunEmail.SendSimpleMessage(Emails,mailSubject,mailBody);
+                if (response.StatusCode == System.Net.HttpStatusCode.OK)
+                {
+                    result = true;
+                }                
             }
-
-
-            BtnSendEmail.Enabled = true;
+       
+            return result;
         }
 }
 }

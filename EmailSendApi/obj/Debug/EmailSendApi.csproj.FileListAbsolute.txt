@@ -2,7 +2,17 @@ E:\test app\EmailSendApi\EmailSendApi\bin\EmailSendApi.dll.config
 E:\test app\EmailSendApi\EmailSendApi\bin\EmailSendApi.dll
 E:\test app\EmailSendApi\EmailSendApi\bin\EmailSendApi.pdb
 E:\test app\EmailSendApi\EmailSendApi\bin\Newtonsoft.Json.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\RestSharp.dll
 E:\test app\EmailSendApi\EmailSendApi\bin\Newtonsoft.Json.xml
+E:\test app\EmailSendApi\EmailSendApi\bin\RestSharp.xml
 E:\test app\EmailSendApi\EmailSendApi\obj\Debug\EmailSendApi.csprojResolveAssemblyReference.cache
 E:\test app\EmailSendApi\EmailSendApi\obj\Debug\EmailSendApi.dll
 E:\test app\EmailSendApi\EmailSendApi\obj\Debug\EmailSendApi.pdb
+E:\test app\EmailSendApi\EmailSendApi\bin\Microsoft.Threading.Tasks.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\Microsoft.Threading.Tasks.Extensions.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\SendGrid.SmtpApi.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\SendGridMail.dll
+E:\test app\EmailSendApi\EmailSendApi\bin\Microsoft.Threading.Tasks.xml
+E:\test app\EmailSendApi\EmailSendApi\bin\Microsoft.Threading.Tasks.Extensions.xml
+E:\test app\EmailSendApi\EmailSendApi\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml

@@ -18,12 +18,12 @@ namespace EmailSender
     {
 
         public static string SendGridUrl = "https://api.sparkpost.com/api/v1/transmissions/";
-        public static string SendGridApiKey = "3e7048d9505ca76070b6bf3495961e125faa3c82";
+        public static string SendGridApiKey = "1d1ffbb823168316e82b0fcad82b6c5dffc805af";//"3e7048d9505ca76070b6bf3495961e125faa3c82";
 
 
-        public static async Task<SendGridEmailResponse> SendEmailGridApi(SendGridEmailRequest request)
+        public static async Task<SendSparkpostEmailResponse> SendEmailSparkPostApi(SendSparkpostEmailRequest request)
         {
-            SendGridEmailResponse response = null;
+            SendSparkpostEmailResponse response = null;
             //Dictionary<string, string> param = new Dictionary<string, string>();
             //param.Add("email_id", email);
 
@@ -35,7 +35,7 @@ namespace EmailSender
             {
                 try
                 {
-                    response = JsonConvert.DeserializeObject<SendGridEmailResponse>(result);
+                    response = JsonConvert.DeserializeObject<SendSparkpostEmailResponse>(result);
                 }
                 catch (Exception e)
                 {

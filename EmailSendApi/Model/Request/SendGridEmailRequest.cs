@@ -9,7 +9,7 @@ using System.Web;
 /// 
  namespace EmailSender
 {
-    public class SendGridEmailRequest
+    public class SendSparkpostEmailRequest
     {     
      
         public Options options { get; set; }

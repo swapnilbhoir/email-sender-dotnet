@@ -6,4 +6,9 @@ $( document ).ready(function() {
 	$("#bccLink").click(function(){
 		$("#bccSection").show();
 	});
+
+
+	$("#BtnSubmit").click(function () {
+	    $("#div_loader").show();
+	});
 });

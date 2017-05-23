@@ -10,7 +10,7 @@ using System.Web;
 
 namespace EmailSender
 {
-    public class SendGridEmailResponse
+    public class SendSparkpostEmailResponse
     {
         public Results results { get; set; }
     }
