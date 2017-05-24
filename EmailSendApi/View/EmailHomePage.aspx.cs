@@ -18,7 +18,8 @@ namespace EmailSender
         {
             
         }
-     
+
+        #region SendMailClick
         protected async void BtnSubmit_Click(object sender, EventArgs e)
         {
             Button BtnSendEmail = sender as Button;     
@@ -64,9 +65,10 @@ namespace EmailSender
             }
 
             BtnSendEmail.Enabled = true;
-        }     
+        }
+        #endregion
 
-
+        #region SendSparkPostEmail
         private async Task<bool> SendSparkPostEmail(string toEmail, string mailSubject, string mailBody)
         {
             bool result = false;
@@ -102,14 +104,14 @@ namespace EmailSender
                 if (response.results.total_accepted_recipients == Emails.Length)
                 {
                     result = true;
-                }
-                
+                }                
             }
 
             return result;
         }
+        #endregion
 
-
+        #region SendMailGunEmail
         private bool SendMailGunEmail(string toEmail, string mailSubject, string mailBody)
         {
             bool result = false;
@@ -127,5 +129,6 @@ namespace EmailSender
        
             return result;
         }
-}
+        #endregion
+    }
 }

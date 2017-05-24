@@ -1,6 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="View_MasterPage" %>
 
 <html xmlns="http://www.w3.org/1999/xhtml" runat="server">
+
 <head runat="server">
         <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -11,34 +12,37 @@
     <asp:ContentPlaceHolder id="head" runat="server">      
     </asp:ContentPlaceHolder>
 </head>
+
 <body >
 
     <form id="form1" runat="server" >
   
-       
+        <div class="body-content" runat="server">     
+            <asp:ContentPlaceHolder ID="BodyContent" runat="server">  
+                
+                
+            </asp:ContentPlaceHolder>. 
+            
+                    
+                       
+        </div>
 
-    <div class="body-content" runat="server">     
-        <asp:ContentPlaceHolder ID="BodyContent" runat="server">            
-        </asp:ContentPlaceHolder>.            
-    </div>
-
-    <hr />
+            <hr />
     
-
-         <div class="row messageSection" >
-                            <div class="col-lg-12 col-md-12 col-sm-12 colxs-12"  >    
+        <div class="row messageSection" >
+            <div class="col-lg-12 col-md-12 col-sm-12 colxs-12"  >    
                                                           
-                                <div class="loader text-center" name="div_loader" id="div_loader" runat="server" visible="true"  >
-                                    <img src="../images/loading.gif">
-                                </div>
-                                <div class="alert alert-success text-center" role="alert"  id="div_success" runat="server" visible="false">Mail Successfully Send</div>
-                                <div class="alert alert-danger text-center" role="alert"  id="div_failure" runat="server" visible="false">Mail Send Failed</div>
+                <div class="loader text-center" name="div_loader" id="div_loader" runat="server" visible="true"  >
+                    <img src="../images/loading.gif">
+                </div>
+                <div class="alert alert-success text-center" role="alert"  id="div_success" runat="server" visible="false">Mail Successfully Send</div>
+                <div class="alert alert-danger text-center" role="alert"  id="div_failure" runat="server" visible="false">Mail Send Failed</div>
 
-                            </div>
             </div>
+        </div>  
+        
    
     </form>
-
 
     <script src="../js/jquery-3.2.1.js"></script>
     <script src="../js/bootstrap.min.js"></script>

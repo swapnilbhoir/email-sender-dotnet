@@ -93,6 +93,13 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\style.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="images\background.png" />
+    <Content Include="images\checked.png" />
+    <Content Include="images\down-arow.png" />
+    <Content Include="images\email-icon.png" />
+    <Content Include="images\email-send.png" />
+    <Content Include="images\email.png" />
+    <Content Include="images\error.png" />
     <Content Include="images\loading.gif" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
@@ -100,11 +107,15 @@
     <Content Include="js\npm.js" />
     <Content Include="js\script.js" />
     <Content Include="View\EmailHomePage.aspx" />
+    <Content Include="View\NewEmailPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\MailGunEmail.cs" />
+    <Compile Include="Model\Request\EmailerRequest.cs" />
     <Compile Include="Model\Request\SendGridEmailRequest.cs" />
+    <Compile Include="Model\Response\EmailerResponse.cs" />
+    <Compile Include="Model\Response\LoginResponse.cs" />
     <Compile Include="Model\Response\SendGridEmailResponse.cs" />
     <Compile Include="Model\WebServiceUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -115,6 +126,13 @@
     <Compile Include="View\MasterPage.master.cs">
       <DependentUpon>MasterPage.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\NewEmailPage.aspx.cs">
+      <DependentUpon>NewEmailPage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\NewEmailPage.aspx.designer.cs">
+      <DependentUpon>NewEmailPage.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

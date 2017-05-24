@@ -1,16 +1,42 @@
 body{
 	background-color: #ebeff2;
+	background-image: url(../images/background.png);
+	font-family: 'Montserrat', sans-serif;
 }
 
-#ccSection, #bccSection{
-	display: none;
+.messagetxt{
+	font-size: 2.5em;
+	font-weight: 500;
+	color: #ffffff;
+	margin: 2em 0 1em 0;
 }
 
-.pageBar{
-	background-color: #333333;
-	color:#ffffff;
-	padding-bottom: 0.7em;
-	margin-bottom: 3em;
+.cardHeadMess{
+	font-size: 0.95em;
+    font-weight: 500;
+    color: #ccc;
+}
+
+.emailImg{
+	width: 30%;
+}
+
+.downArrowSection{
+	margin-top: 3.5em;
+}
+
+.downArrow{
+	background-color: #ffffff;
+	padding: 1.5em;
+	border-radius: 30px;
+	-webkit-box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.25);
+	-moz-box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.25);
+	box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.25);
+	cursor: pointer;
+}
+
+.notifyTxt{
+	font-size: 2em;
 }
 
 .row {
@@ -22,13 +48,110 @@ body{
 	padding: 20px;
     border: 1px solid rgba(54, 64, 74, 0.05);
     -webkit-border-radius: 5px;
-    border-radius: 5px;
+    border-radius: 10px;
     -moz-border-radius: 5px;
     background-clip: padding-box;
     margin-bottom: 20px;
-    background-color: #ffffff;
+	background-color: #f9fafc;
+	-webkit-box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
+	min-height: 350px;
+}
+
+.loginCard{
+	padding: 40px 20px;
+    border: 1px solid rgba(54, 64, 74, 0.05);
+    -webkit-border-radius: 5px;
+    border-radius: 10px;
+    -moz-border-radius: 5px;
+    background-clip: padding-box;
+    margin-bottom: 20px;
+	background-color: #f9fafc;
+	-webkit-box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
+	box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
+	min-height: 150px;
+}
+
+.form-control{
+	border: 1px solid #e3e3e3;
+	height: 40px;
+	border-radius: 6px;
+}
+
+.proceedSection{
+	margin: 2em 0;
 }
 
 .messageSection{
-    margin-top: 1em;
+	margin-top: 1em;
 }
+
+#emailForm{
+	padding: 1.2em 0.7em;
+}
+
+.enterEmail{
+	display: none;
+}
+
+.sendEmail{
+	display: none;
+}
+
+.emailSuccess{
+	display: none;
+	margin-top: 5em;
+}
+
+.emailfailure{
+	display: none;
+	margin-top: 5em;
+}
+
+.emailloading{
+	display: none;
+	margin-top: 5em;
+}
+
+.btn-enter{
+	color: #506CD8;
+	font-size: 1.5em;
+	padding-bottom: 0.3em;
+	border-bottom: 3px solid #506CD8;
+}
+
+.btn-enter:hover{
+	color: #506CD8;
+	cursor: pointer;
+}
+
+.btn-login{
+	background-color: #506CD8;
+	padding: 0.6em 1em;
+	border-radius: 6px;
+}
+
+.btn-login:hover{
+	background-color: #4059b2;
+}
+
+.btn-send{
+	background-color: #506CD8;
+	padding: 1.2em 1em;
+	border-radius: 6px;
+}
+
+.btn-send:hover{
+	background-color: #4059b2;
+}
+
+.iconSection{
+	padding: 3em;
+}
+
+.sendagnSection{
+	margin: 3em;
+}
+
