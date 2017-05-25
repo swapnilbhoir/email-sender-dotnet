@@ -19,14 +19,15 @@ namespace EmailSender
 {
     public static class WebServiceUtil
     {
-
+        #region Variables
         public static string SendGridUrl = "https://api.sparkpost.com/api/v1/transmissions/";
         public static string SendGridApiKey = "1d1ffbb823168316e82b0fcad82b6c5dffc805af";//"3e7048d9505ca76070b6bf3495961e125faa3c82";
         public static string LoginUrl = "http://10.40.12.205:3000/user/signin";
         public static string MailToken = "";
         public static string MailUrl = "http://10.40.12.205:3000/v1/mailer/sendmail";
+        #endregion
 
-
+        #region SparkPostApi
         public static async Task<SendSparkpostEmailResponse> SendEmailSparkPostApi(SendSparkpostEmailRequest request)
         {
             SendSparkpostEmailResponse response = null;
@@ -51,8 +52,9 @@ namespace EmailSender
 
             return response;
         }
+        #endregion
 
-
+        #region SendEmailApi
         public static async Task<EmailerResponse> SendEmailApi(EmailerRequest request)
         {
             EmailerResponse response = null;
@@ -77,10 +79,9 @@ namespace EmailSender
 
             return response;
         }
+        #endregion
 
-
-
-
+        #region UserLogin
         public static async Task<LoginResponse> Login(string username,string password)
         {
             LoginResponse response = null;
@@ -106,16 +107,15 @@ namespace EmailSender
 
             return response;
         }
+        #endregion
 
-       
+        #region PostAsyncCall
         private async static Task<string> PostAsync(string postData, string functionName, string BASE_URL , bool header , bool emailHeader)
         {
 
-
             string result = "";
 
-
-            if (postData != null )//&& !string.IsNullOrEmpty(functionName))
+            if (postData != null)
             {
                 Uri url = new Uri(BASE_URL + functionName);
                 HttpClient httpClient = new HttpClient();
@@ -123,12 +123,12 @@ namespace EmailSender
 
                 if(header==true)
                 {
-                   // httpClient.DefaultRequestHeaders.Add("Content-Type","application/json");
                     httpClient.DefaultRequestHeaders.Add("Authorization", SendGridApiKey);
                 }
                
                 if(emailHeader==true)
                 {
+           
                     httpClient.DefaultRequestHeaders.Add("Authorization", MailToken);
                 }
 
@@ -143,7 +143,25 @@ namespace EmailSender
                         {
                             if(emailHeader)
                             {
-                               MailToken= response.Headers.GetValues("Authorization").ToString();
+                               
+                                IEnumerable<string> str = response.Headers.GetValues("Authorization");
+
+                                if (str != null)
+                                {
+                                    string[] arrayString = str.ToArray();
+
+                                    if (arrayString != null)
+                                    {
+                                        if (arrayString.Length >= 1)
+                                        {
+                                            if (!string.IsNullOrEmpty(arrayString[0]))
+                                            {
+                                                MailToken = arrayString[0];
+                                            }
+                                        }
+                                    }
+                                }
+                             
                             }
 
                             result = await response.Content.ReadAsStringAsync();
@@ -162,7 +180,7 @@ namespace EmailSender
             }
             return result;
         }
-
+        #endregion
 
     }
 

@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true"  Async="true"    CodeBehind="NewEmailPage.aspx.cs" Inherits="EmailSendApi.View.NewEmailPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true"  Async="true"  CodeBehind="NewEmailPage.aspx.cs" Inherits="EmailSendApi.View.NewEmailPage" %>
 
 <!DOCTYPE html>
 
@@ -20,10 +20,88 @@
 		<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
 
     <title>Email Service</title>
-   
+
+    <%--<meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="~/js/bootstrap.min.js" rel="stylesheet" runat="server" />
+    <link href="~/css/style.css" rel="stylesheet" runat="server" />--%>
+    
+    <%-- <asp:ContentPlaceHolder id="head" runat="server">      
+    </asp:ContentPlaceHolder>--%>
 </head>
 <body>
-    
+    <%--<form id="form1" runat="server">--%>
+
+        
+
+        <%--            <div class="row pageBar">
+                <div class="col-lg-12 text-center">
+                    <h3>Send Email</h3>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12">
+                    <div class="card">
+
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="toEmail" id="toEmail" placeholder="To" title="email" required="required" multiple="multiple" />
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 colxs-12" id="ccSection">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="ccEmail" id="ccEmail" placeholder="Cc" />
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 colxs-12" id="bccSection">
+                                <div class="form-group">
+                                    <input type="email" class="form-control" name="bccEmail" id="bccEmail" placeholder="Bcc" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="subjectEmail" id="subjectEmail" placeholder="Subject" required="required" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+                                <div class="form-group">
+                                    <textarea class="form-control" name="composeEmail" id="composeEmail" rows="5" placeholder="Compose" required="required"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+                                <asp:Button type="submit" name="BtnSubmit" ID="BtnSubmit" class="btn btn-primary" runat="server" Text="Send" OnClick="BtnSubmit_Click"></asp:Button>
+                            </div>
+                        </div>
+                        <div class="row messageSection">
+
+                            <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+
+                                <div class="loader text-center" name="div_loader" id="div_loader" runat="server" visible="false">
+                                    <img src="../images/loading.gif" runat="server"/>                                    
+                                </div>
+                                <div class="alert alert-success text-center" role="alert" id="div_success" runat="server" visible="false">Mail Successfully Send</div>
+                                <div class="alert alert-danger text-center" role="alert" id="div_failure" runat="server" visible="false">Mail Send Failed</div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>--%>
+
+
             <!-- Container Start -->
 
     <form id="form1" runat="server">
@@ -102,29 +180,27 @@
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
 								<div class="form-group">
-             
-									<input type="email" class="form-control"  name="toEmail" id="toEmail" placeholder="To" multiple="multiple" required="required" onchange="Validate()" />                        
-
+									<input type="email" class="form-control" name="toEmail" id="toEmail" placeholder="To" multiple="multiple" required="required" />
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
 								<div class="form-group">
-									<input type="text" class="form-control" name="subjectEmail" id="subjectEmail" placeholder="Subject" required="required" onchange="Validate()" />
+									<input type="text" class="form-control" name="subjectEmail" id="subjectEmail" placeholder="Subject" required="required"/>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
 								<div class="form-group">
-									<textarea class="form-control" name="composeEmail" id="composeEmail" rows="5" placeholder="Compose" required="required" onchange="Validate()"></textarea>
+									<textarea class="form-control" name="composeEmail" id="composeEmail" rows="5" placeholder="Compose" required="required"></textarea>
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
-								<button type="submit" disabled="disabled" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn btn-primary btn-send" id="BtnSubmitId" name="BtnSubmitId" runat="server" onserverclick="BtnSubmit_Click" >Send</button>
+								<button type="submit" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn btn-primary btn-send" id="BtnSubmitId" name="BtnSubmitId" runat="server" onserverclick="BtnSubmit_Click" >Send</button>
 
                                
 
@@ -201,18 +277,22 @@
             {
                 $(".loginSection").hide(0);
                 $(".sendEmail").slideDown(500);
-                               
+               // $(".enterEmail").slideDown(500);
+                
             }
 
-           
+            //function downArrowClick() {
+            //    $(".enterEmail").slideUp(500);
+            //    $(".sendEmail").delay(500).slideDown(500);
+            //    $('#div').show(0).delay(5000).hide(0);
+            //}
+
             function loading() {
                 $(".sendEmail").slideUp(500);
                 $(".emailloading").delay(500).slideDown(500);
-             
+               // $(".emailloading").delay(1000).slideDown(500).slideUp(500).hide(0);
+                //	$(".emailSuccess").delay(2000).slideDown(500);
             }
-
-
-           
 
 
             function successMail()
@@ -230,29 +310,6 @@
                 $(".emailfailure").delay(2000).slideDown(500);
             }
 
-            function Validate()
-            {
-                if(document.getElementById("toEmail").value!=""  && document.getElementById("subjectEmail").value!="" && document.getElementById("composeEmail").value!="")
-                {
-                    document.getElementById("BtnSubmitId").disabled = false;
-                    
-                }
-                else
-                {
-                    document.getElementById("BtnSubmitId").disabled = true;
-                }
-
-                //toEmail
-                //subjectEmail
-                //composeEmail
-
-
-                
-
-            }
-
-
-
             //function sendAgainClick() {
             //    $(".emailSuccess").slideUp(500).hide(0);
             //    $(".sendEmail").delay(1000).slideDown(500);
@@ -262,6 +319,7 @@
             //    $(".emailfailure").slideUp(500).hide(0);
             //    $(".sendEmail").delay(1000).slideDown(500);
             //}
+
 
          </script>
 

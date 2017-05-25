@@ -153,7 +153,6 @@ namespace EmailSendApi.View
         }
         #endregion
 
-
         #region SendEmailViaOwn
 
         private async Task<bool> SendEmail(string toEmail, string mailSubject, string mailBody)
@@ -196,30 +195,7 @@ namespace EmailSendApi.View
 
         #endregion
 
-        protected async void login_Click(object sender, EventArgs e)
-        {
-            Button selectedButton = sender as Button;
-
-            selectedButton.Enabled = false;
-
-            string username = String.Format("{0}", Request.Form["userNametxt"]);
-            string password = String.Format("{0}", Request.Form["userPasstxt"]);
-
-            if(string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-            {
-                
-                div_login_failure.InnerText="Invalid username or password";
-                div_login_failure.Visible = true;
-            }
-            else
-            {
-                await PerformLogin(username, password);
-            }
-
-
-            selectedButton.Enabled = false;
-        }
-
+        #region Login
 
         private async Task<bool> PerformLogin(string username,string password)
         {
@@ -232,6 +208,7 @@ namespace EmailSendApi.View
                 {
                     WebServiceUtil.MailToken = response.data.token;
 
+                    divLogout.Attributes.Add("style", "display:block");
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "loginClick", "loginClick();", true);
 
                 }
@@ -239,11 +216,13 @@ namespace EmailSendApi.View
                 {
                     div_login_failure.InnerText = response.msg;
                     div_login_failure.Attributes.Add("style", "display:block");
+                    divLogout.Attributes.Add("style", "display:none");
                 }
             }
             else
             {
                 div_login_failure.InnerText = "No Response From Server";
+                divLogout.Attributes.Add("style", "display:none");
                 div_login_failure.Attributes.Add("style", "display:block");
             }
 
@@ -262,6 +241,7 @@ namespace EmailSendApi.View
 
                 div_login_failure.InnerText = "Invalid username or password";
                 div_login_failure.Attributes.Add("style", "display:block");
+                divLogout.Attributes.Add("style", "display:none");
             }
             else
             {
@@ -272,6 +252,9 @@ namespace EmailSendApi.View
             login_id.Disabled = false;
         }
 
+        #endregion
+
+        #region MailValidation
 
         private bool IsValidEmailInput(string toEmail)
         {
@@ -285,5 +268,7 @@ namespace EmailSendApi.View
 
                 return result;
         }
+
+        #endregion
     }
 }

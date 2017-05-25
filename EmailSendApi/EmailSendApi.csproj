@@ -106,7 +106,6 @@
     <Content Include="js\jquery-3.2.1.js" />
     <Content Include="js\npm.js" />
     <Content Include="js\script.js" />
-    <Content Include="View\EmailHomePage.aspx" />
     <Content Include="View\NewEmailPage.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -119,14 +118,6 @@
     <Compile Include="Model\Response\SendGridEmailResponse.cs" />
     <Compile Include="Model\WebServiceUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\EmailHomePage.aspx.cs">
-      <DependentUpon>EmailHomePage.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="View\MasterPage.master.cs">
-      <DependentUpon>MasterPage.master</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
     <Compile Include="View\NewEmailPage.aspx.cs">
       <DependentUpon>NewEmailPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,8 +135,8 @@
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="View\MasterPage.master" />
     <Content Include="packages.config" />
+    <Content Include="ReadMe.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -153,9 +144,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controller\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
