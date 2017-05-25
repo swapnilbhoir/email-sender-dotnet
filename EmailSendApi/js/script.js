@@ -1,6 +1,12 @@
 $( document ).ready(function() {
 
 	
+    $('#BtnSubmitId').click(function () {
+        $(".sendEmail").slideUp(500);
+        $(".emailloading").delay(500).slideDown(500);
+    });
+
+
 	
     $(".downArrow").click(function(){
 		$(".enterEmail").slideUp(500);
@@ -17,6 +23,7 @@ $( document ).ready(function() {
         $(".emailSuccess").hide(0);
         $(".emailfailure").hide(0);
         $(".sendEmail").hide(0);
+      
 
     });
 	
@@ -25,6 +32,7 @@ $( document ).ready(function() {
         $(".emailSuccess").slideUp(500).hide(0);
         $(".emailfailure").slideUp(500).hide(0);
         $(".sendEmail").delay(1000).slideDown(500);
+        document.getElementById("BtnSubmitId").disabled = true;
     });
 	
 	

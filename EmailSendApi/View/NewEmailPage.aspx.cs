@@ -16,6 +16,10 @@ namespace EmailSendApi.View
 {
     public partial class NewEmailPage : System.Web.UI.Page
     {
+        #region Variable
+        public bool isTokenExpire = false;
+        #endregion
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -34,7 +38,11 @@ namespace EmailSendApi.View
             {
                 if (IsValidEmailInput(toEmail))
                 {
-                    Page.ClientScript.RegisterStartupScript(this.GetType(), "loading", "loading();", true);
+                  
+
+                  
+
+                  //  Page.ClientScript.RegisterStartupScript(this.GetType(), "loading", "loading();", true);
 
                     if (!await SendSparkPostEmail(toEmail, mailSubject, mailBody))
                     {
@@ -44,7 +52,14 @@ namespace EmailSendApi.View
 
                             if (!await SendEmail(toEmail, mailSubject, mailBody))
                             {
-                                Page.ClientScript.RegisterStartupScript(this.GetType(), "failureMail", "failureMail();", true);
+                                if (isTokenExpire)
+                                {
+                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "SessionExpire", "SessionExpire();", true);
+                                }
+                                else
+                                {
+                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "failureMail", "failureMail();", true);
+                                }
                             }
                             else
                             {
@@ -55,9 +70,7 @@ namespace EmailSendApi.View
                         else
                         {
                             
-
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "successMail", "successMail();", true);
-
                             
                         }
                     }
@@ -66,7 +79,6 @@ namespace EmailSendApi.View
                         //mail send sucessfully using SparkPost
 
                         Page.ClientScript.RegisterStartupScript(this.GetType(), "successMail", "successMail();", true);
-
                        
                     }
 
@@ -188,6 +200,11 @@ namespace EmailSendApi.View
                 {                  
                     result = true;
                 }
+                else if (response.code == 402 || response.code == 401)
+                {
+                    isTokenExpire = true;
+                  
+                }
             }
 
             return result;
@@ -206,6 +223,7 @@ namespace EmailSendApi.View
             {
                 if(response.code==2000)
                 {
+                    isTokenExpire = false;
                     WebServiceUtil.MailToken = response.data.token;
 
                     divLogout.Attributes.Add("style", "display:block");

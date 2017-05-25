@@ -27,7 +27,7 @@
             <!-- Container Start -->
 
     <form id="form1" runat="server">
-        
+        <asp:ScriptManager ID="ScriptManager1" runat="server" />
 
 		<div class="container">
 			<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-12 col-xs-12 loginSection">
@@ -128,7 +128,7 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
-								<button type="submit" disabled="disabled" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn btn-primary btn-send" id="BtnSubmitId" name="BtnSubmitId" runat="server" onserverclick="BtnSubmit_Click"  ><img src="../images/email-send.png"/> Send</button>
+								<button type="submit" disabled="disabled" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 btn btn-primary btn-send" id="BtnSubmitId" name="BtnSubmitId" runat="server" onserverclick="BtnSubmit_Click"  >Send</button>
 
                                
 
@@ -178,18 +178,34 @@
 			</div>
 
           
-			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 text-center emailloading">
+<%--			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 text-center emailloading">
 				<div class="card">
 					<div class="loader text-center">
-						<img src="../images/loading.gif"  />
-                        <br />
-                        <span>Processing...</span>
+						<img src="../images/loading.gif"/>
 					</div>
+				</div>
+			</div>--%>
 
+           <asp:UpdatePanel ID="UpdatePanel1"  runat="server" UpdateMode="Conditional">
+                <ContentTemplate>
+                  
+                </ContentTemplate>
+            </asp:UpdatePanel>
+                   
+            <asp:UpdateProgress ID="UpdateProgress" runat="server" AssociatedUpdatePanelID="UpdatePanel1">
+                    <ProgressTemplate>
+                    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 text-center emailloading">
+				<div class="card">
+					<div class="loader text-center">
+						<img src="../images/loading.gif"/>
+					</div>
 				</div>
 			</div>
 
-           
+                    </ProgressTemplate>
+</asp:UpdateProgress>
+
+
 
 
 
@@ -214,7 +230,6 @@
             }
            
             function loading() {
-                $(".loginSection").hide(0);
                 $(".sendEmail").slideUp(500);
                 $(".emailloading").delay(500).slideDown(500);
              
@@ -236,15 +251,14 @@
             {
                 $(".loginSection").hide(0);
                 $(".emailloading").slideUp(500);;
-                $(".emailSuccess").delay(1500).slideDown(500);
-               
+                $(".emailSuccess").delay(2000).slideDown(500);
             }
 
             function failureMail()
             {
                 $(".loginSection").hide(0);
                 $(".emailloading").slideUp(500);;
-                $(".emailfailure").delay(1500).slideDown(500);
+                $(".emailfailure").delay(2000).slideDown(500);
             }
 
             function Validate()
@@ -274,7 +288,10 @@
                 return re.test(email);
             }
 
-           
+            function showProgress() {
+                var updateProgress = $get("<%= UpdateProgress.ClientID %>");
+                updateProgress.style.display = "block";
+            }
 
          </script>
 

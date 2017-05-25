@@ -1,29 +1,42 @@
+/* Body background image,color and font */
+
 body{
 	background-color: #ebeff2;
 	background-image: url(../images/background.png);
 	font-family: 'Montserrat', sans-serif;
 }
 
+/* All card heading text style */
+
 .messagetxt{
 	font-size: 2.5em;
 	font-weight: 500;
 	color: #ffffff;
-	margin: 2em 0 1em 0;
+	margin: 1em 0 0.5em 0;
 }
+
+/* Text message inside the card style */
 
 .cardHeadMess{
 	font-size: 0.95em;
     font-weight: 500;
-    color: #ccc;
+    color: #a2a2a2;
 }
 
+/* Email icon css */
+
 .emailImg{
+    padding-top:2em;
 	width: 30%;
 }
+
+/* Go to send email icon css section styling */
 
 .downArrowSection{
 	margin-top: 3.5em;
 }
+
+/* Go to send email icon css styling */
 
 .downArrow{
 	background-color: #ffffff;
@@ -35,14 +48,21 @@ body{
 	cursor: pointer;
 }
 
+/* Email send and error message css */
+
 .notifyTxt{
 	font-size: 2em;
+    color: #a2a2a2;
 }
+
+/* Bootstrap row scrolling issue fix styling */
 
 .row {
     margin-right: 0px;
     margin-left: 0px;
 }
+
+/* Card styling */
 
 .card{
 	padding: 20px;
@@ -57,6 +77,12 @@ body{
 	-moz-box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
 	box-shadow: -1px 1px 10px 0px rgba(0,0,0,0.75);
 	min-height: 350px;
+}
+
+/* Login page card styling */
+
+.loginSection{
+    margin-top:5em;
 }
 
 .loginCard{
@@ -74,58 +100,82 @@ body{
 	min-height: 150px;
 }
 
+/* Overwriting default bootstrap form styling */
+
 .form-control{
 	border: 1px solid #e3e3e3;
 	height: 40px;
 	border-radius: 6px;
 }
 
+/* Styling for the proceed further message */
+
 .proceedSection{
 	margin: 2em 0;
 }
+
+/* */
 
 .messageSection{
 	margin-top: 1em;
 }
 
+/* Email form styling */
+
 #emailForm{
 	padding: 1.2em 0.7em;
 }
+
+/* hiding email card */
 
 .enterEmail{
 	display: none;
 }
 
+/* hiding send email card */
+
 .sendEmail{
 	display: none;
 }
+
+/* hiding successfull message card */
 
 .emailSuccess{
 	display: none;
 	margin-top: 5em;
 }
 
+/* hiding failure message card */
 .emailfailure{
 	display: none;
 	margin-top: 5em;
 }
 
+/* hiding loading card */
 .emailloading{
 	display: none;
-	margin-top: 5em;
+	margin-top: 8em;
+
 }
 
+/* Send email button styling */
+
 .btn-enter{
-	color: #506CD8;
-	font-size: 1.5em;
-	padding-bottom: 0.3em;
-	border-bottom: 3px solid #506CD8;
+	color: #929191;
+    font-size: 1.2em;
+    padding-bottom: 0.3em;
+    text-decoration: underline;
+    padding-bottom: 1em;
 }
+
+/* Send email button hover styling */
 
 .btn-enter:hover{
 	color: #506CD8;
 	cursor: pointer;
 }
+
+/* login form button styling */
 
 .btn-login{
 	background-color: #506CD8;
@@ -133,9 +183,13 @@ body{
 	border-radius: 6px;
 }
 
+/* login form button hover styling */
+
 .btn-login:hover{
 	background-color: #4059b2;
 }
+
+/* send email button styling */
 
 .btn-send{
 	background-color: #506CD8;
@@ -143,21 +197,31 @@ body{
 	border-radius: 6px;
 }
 
+
+/* send email button hover styling */
 .btn-send:hover{
 	background-color: #4059b2;
 }
+
+/* Success and failure icon styling */
 
 .iconSection{
 	padding: 3em;
 }
 
+/* send email again section styling */
+
 .sendagnSection{
 	margin: 3em;
 }
 
+/* logout section styling */
+
 .logOutSection{
     padding: 1em 0 1em 0;
 }
+
+/* Logout button styling */
 
 .logoutBtn{
     color:#fc8888;
@@ -166,6 +230,8 @@ body{
     text-decoration: none;
     font-weight: 100;
 }
+
+/* Logout button hover styling */
 
 .logoutBtn:hover{
     color:#f76767;
@@ -176,4 +242,14 @@ body{
 }
 
 
+/*Login page Error Message Styling */
+.alert-danger{
+    margin-top:1em;
+}
 
+
+/*Loading Section Style*/
+
+.loader{
+    margin-top:7em;
+}

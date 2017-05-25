@@ -172,6 +172,17 @@ namespace EmailSender
                             Debug.WriteLine(e.StackTrace);
                         }
                     }
+                    else
+                    {
+                        if(emailHeader)
+                        {
+                            if(response!=null)
+                            {
+                                result = await response.Content.ReadAsStringAsync();
+                            }
+                        }
+                           
+                    }
                 }
                 catch (Exception e)
                 {
