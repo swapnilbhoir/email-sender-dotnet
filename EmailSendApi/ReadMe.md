@@ -10,24 +10,24 @@
 
  * **Email Api Used** :
 
-   * Sparkpost
-   * MailGun
-   * NodeMailer
+       * Sparkpost
+       * MailGun
+       * NodeMailer
 
  * **Namespaces Used Within Project** :
 
-   * RestSharp
-   * Newtonsoft
-   * System.Net.Http
+       * RestSharp
+       * Newtonsoft
+       * System.Net.Http
 
 * **Folders Used Within Project** :
 
-   * css : Used for placing style sheet file
-   * fonts : Used for placing fonts used within project
-   * images : Used for placing images used within project
-   * js : Used for placing javscript file  
-   * Model : Files related to webservice calls 
-   * View : Presentation Files
+       * css : Used for placing style sheet file
+       * fonts : Used for placing fonts used within project
+       * images : Used for placing images used within project
+       * js : Used for placing javscript file  
+       * Model : Files related to webservice calls 
+       * View : Presentation Files
 
 
 
@@ -35,9 +35,9 @@
 
 1. Create a Deployment Folder
 
-   * This option uses the Visual Studio .NET Web Deployment Project add-in to create a separate folder that can be copied to your deployment server.  To use this option, you must download and install the Visual Studio .NET Web Deployment Projects available at:
+    * This option uses the Visual Studio .NET Web Deployment Project add-in to create a separate folder that can be copied to your deployment server.  To use this option, you must download and install the Visual Studio .NET Web Deployment Projects available at:
 
-  [Link] (http://www.microsoft.com/downloads/details.aspx?familyId=0AA30AE8-C73B-4BDD-BB1B-FE697256C459&displaylang=en)
+     [Link] (`http://www.microsoft.com/downloads/details.aspx?familyId=0AA30AE8-C73B-4BDD-BB1B-FE697256C459&displaylang=en`)
 
                     In this option, a single pre-compiled DLL is created for your application.  Only the ASPX, ASCX, RESX and DLL files need to be copied to your deployment server.  To make it easy for you, this option creates a separate folder containing all of the relevant files and this folder can be copied in its entirety to the deployment server.
 
@@ -107,9 +107,12 @@
 
                     Step 5:  Start the session state service on your production machine.  See Starting Your Session State Service for details.
 
- *  **Other Usefull Links for Deployment Of Asp .Net Web Application** :
-  
-  [Link1] (https://msdn.microsoft.com/en-us/library/dd394698%28VS.100%29.aspx)
+* **Other Usefull Links for Deployment Of Asp .Net Web Application** :
 
-  [Link2] (https://www.tutorialspoint.com/asp.net/asp.net_deployment.htm)                
+   [Link1] (`https://msdn.microsoft.com/en-us/library/dd394698%28VS.100%29.aspx`)
 
+   [Link2] (`https://www.tutorialspoint.com/asp.net/asp.net_deployment.htm`) 
+               
+* **Link for guidelines regarding installing visual studio** :
+
+   [Link1] (`https://msdn.microsoft.com/en-us/library/e2h7fzkw(v=vs.100).aspx`)
