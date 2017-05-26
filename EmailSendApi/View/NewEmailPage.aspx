@@ -107,7 +107,7 @@
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
 								<div class="form-group">
              
-									<input type="email" class="form-control"  name="toEmail" id="toEmail" placeholder="To" multiple="multiple" required="required"   onkeydown="Validate()"/>                        
+									<input type="email" class="form-control"  name="toEmail" id="toEmail" placeholder="To"  required="required"   onkeydown="Validate()" onblur="EmailValidateOnBlur()"/>                        
 
 								</div>
 							</div>
@@ -115,14 +115,14 @@
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
 								<div class="form-group">
-									<input type="text" class="form-control" name="subjectEmail" id="subjectEmail" placeholder="Subject" required="required" onkeydown="Validate()" />
+									<input type="text" class="form-control" name="subjectEmail" id="subjectEmail" placeholder="Subject" required="required" onkeydown="Validate()" onblur="SubjectValidateOnBlur()" />
 								</div>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
 								<div class="form-group">
-									<textarea class="form-control" name="composeEmail" id="composeEmail" rows="5" placeholder="Compose" required="required" onkeydown="Validate()"></textarea>
+									<textarea class="form-control" name="composeEmail" id="composeEmail" rows="5" placeholder="Compose" required="required" onkeydown="Validate()" onblur="BodyValidateOnBlur()"></textarea>
 								</div>
 							</div>
 						</div>
@@ -138,6 +138,13 @@
 
 							</div>
 						</div>
+
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+                            <div class="alert alert-danger text-center" style="display:none" role="alert" id="div_email_validation_msg" runat="server" >All Three Parameters Required</div>
+                        </div>
+                     </div>
+
 					<%--</form>--%>
 				</div>
 			</div>
@@ -213,6 +220,8 @@
                                
             }
            
+           
+
             function loading() {
                 $(".loginSection").hide(0);
                 $(".sendEmail").slideUp(500);
@@ -250,13 +259,14 @@
             function Validate()
             {               
                 if(document.getElementById("toEmail").value==""  || document.getElementById("subjectEmail").value=="" || document.getElementById("composeEmail").value=="")
-                {                   
+                {                    
                     document.getElementById("BtnSubmitId").disabled = true;                                                
                 }
                 else
                 {
                     if (validateEmail(document.getElementById("toEmail").value))
                     {
+                        document.getElementById("div_email_validation_msg").style.display = "none";
                         document.getElementById("BtnSubmitId").disabled = false;
                     }
                     else
@@ -268,9 +278,61 @@
             }
 
 
+            function EmailValidateOnBlur()
+            {
+                if(document.getElementById("toEmail").value=="")
+                {
+                    document.getElementById("div_email_validation_msg").style.display = "block";
+                    document.getElementById("div_email_validation_msg").innerText = "Email Field Is Required";
+                    
+                }
+                else if (!validateEmail(document.getElementById("toEmail").value))
+                {
+                   
+                        document.getElementById("div_email_validation_msg").style.display = "block";
+                        document.getElementById("div_email_validation_msg").innerText = "Kindly Provide Proper Email Id";                    
+                }
+                else
+                {
+                    document.getElementById("div_email_validation_msg").style.display = "none";
+                }
+          
+            }
+
+
+            function SubjectValidateOnBlur()
+            {
+                if(document.getElementById("subjectEmail").value=="")
+                {
+                    document.getElementById("div_email_validation_msg").style.display = "block";
+                    document.getElementById("div_email_validation_msg").innerText = "Email Subject Is Required";
+                }
+                else
+                {
+                    document.getElementById("div_email_validation_msg").style.display = "none";
+                }
+            }
+
+
+            function BodyValidateOnBlur()
+            {
+                if (document.getElementById("composeEmail").value == "")
+                {
+                    document.getElementById("div_email_validation_msg").style.display = "block";
+                    document.getElementById("div_email_validation_msg").innerText = "Email Body Is Required";
+                }
+                else {
+                    document.getElementById("div_email_validation_msg").style.display = "none";
+                }
+            }
+
+
             function validateEmail(email)
             {
                 var re = /^((\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)*([,])*)*$/;
+
+               // var re = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/;
+                
                 return re.test(email);
             }
 

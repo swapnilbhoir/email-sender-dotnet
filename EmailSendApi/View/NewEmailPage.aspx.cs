@@ -43,7 +43,7 @@ namespace EmailSendApi.View
                     {
                         if (!SendMailGunEmail(toEmail, mailSubject, mailBody))
                         {
-                            //failure in sending mail from both email api
+                            
 
                             if (!await SendEmail(toEmail, mailSubject, mailBody))
                             {
@@ -53,6 +53,8 @@ namespace EmailSendApi.View
                                 }
                                 else
                                 {
+                                    //failure in sending mail from all email api
+
                                     Page.ClientScript.RegisterStartupScript(this.GetType(), "failureMail", "failureMail();", true);
                                 }
                             }
@@ -92,8 +94,6 @@ namespace EmailSendApi.View
 
             BtnSubmitId.Disabled = false;
 
-           
-           // BtnSubmitId.Disabled = false;
         }
         #endregion
 
@@ -272,8 +272,9 @@ namespace EmailSendApi.View
         private bool IsValidEmailInput(string toEmail)
         {
             bool result = true;
-
-                Regex emailReg = new Regex(@"^((\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)*([,])*)*$");
+            
+             //Regex emailReg = new Regex(@"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"); // for multiple email
+             Regex emailReg = new Regex(@"^((\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*)*([,])*)*$");
                 if (!emailReg.IsMatch(toEmail))
                 {
                     result = false;                  
