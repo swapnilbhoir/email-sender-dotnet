@@ -39,11 +39,6 @@ namespace EmailSendApi.View
                 if (IsValidEmailInput(toEmail))
                 {
                   
-
-                  
-
-                  //  Page.ClientScript.RegisterStartupScript(this.GetType(), "loading", "loading();", true);
-
                     if (!await SendSparkPostEmail(toEmail, mailSubject, mailBody))
                     {
                         if (!SendMailGunEmail(toEmail, mailSubject, mailBody))
