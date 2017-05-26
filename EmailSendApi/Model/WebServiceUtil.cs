@@ -22,10 +22,10 @@ namespace EmailSender
         #region Variables
         public static string SendGridUrl = "https://api.sparkpost.com/api/v1/transmissions/";
         public static string SendGridApiKey = "1d1ffbb823168316e82b0fcad82b6c5dffc805af";//"3e7048d9505ca76070b6bf3495961e125faa3c82";
-        public static string LoginUrl = "http://10.40.12.205:3000/user/signin";
+        public static string LoginUrl = "http://localhost:3000/user/signin";
         public static string MailToken = "";
-        public static string MailUrl = "http://10.40.12.205:3000/v1/mailer/sendmail";
-        public static string SignUpUrl = "http://10.40.12.205:3000/user/signup";
+        public static string MailUrl = "http://localhost:3000/v1/mailer/sendmail";
+        public static string SignUpUrl = "http://localhost:3000/user/signup";
         #endregion
 
         #region SparkPostApi
