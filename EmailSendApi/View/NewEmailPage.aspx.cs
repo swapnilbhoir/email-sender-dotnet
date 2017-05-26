@@ -77,7 +77,7 @@ namespace EmailSendApi.View
                        
                     }
 
-                    //BtnSendEmail.Enabled = true;
+                   
                 }
                 else
                 {
