@@ -32,9 +32,8 @@
 * **Project Deployment Steps** :
    1. You need to download and run Node js project from following repository
 
-   2. Download and run this Asp .Net web application using visual studio 2013 or higher, link to download   
-
-
+   2. Download and run this Asp .Net web application using visual studio 2013 or higher, link to download :  
+        [Link] (`https://www.visualstudio.com/downloads/`)
 
 
 *  **The manual deployment options and configuration process are described below.**
