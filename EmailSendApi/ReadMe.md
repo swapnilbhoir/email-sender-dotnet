@@ -29,6 +29,12 @@
        * Model : Files related to webservice calls 
        * View : Presentation Files
 
+* **Project Deployment Steps** :
+   1. You need to download and run Node js project from following repository
+
+   2. Download and run this Asp .Net web application using visual studio 2013 or higher, link to download   
+
+
 
 
 *  **The manual deployment options and configuration process are described below.**
