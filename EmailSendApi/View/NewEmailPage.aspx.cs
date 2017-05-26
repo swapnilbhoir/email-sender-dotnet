@@ -29,70 +29,89 @@ namespace EmailSendApi.View
         protected async void BtnSubmit_Click(object sender, EventArgs e)
         {
             BtnSubmitId.Disabled = true;
-                      
-            string toEmail = String.Format("{0}", Request.Form["toEmail"]);
-            string mailSubject = String.Format("{0}", Request.Form["subjectEmail"]);
-            string mailBody = String.Format("{0}", Request.Form["composeEmail"]);
 
-            if (!string.IsNullOrEmpty(toEmail) && !string.IsNullOrEmpty(mailSubject) && !string.IsNullOrEmpty(mailBody))
+            try
             {
-                if (IsValidEmailInput(toEmail))
-                {
-                  
-                    if (!await SendSparkPostEmail(toEmail, mailSubject, mailBody))
-                    {
-                        if (!SendMailGunEmail(toEmail, mailSubject, mailBody))
-                        {
-                            
 
-                            if (!await SendEmail(toEmail, mailSubject, mailBody))
+                string toEmail = String.Format("{0}", Request.Form["toEmail"]);
+                string mailSubject = String.Format("{0}", Request.Form["subjectEmail"]);
+                string mailBody = String.Format("{0}", Request.Form["composeEmail"]);
+
+                if (!string.IsNullOrEmpty(toEmail) && !string.IsNullOrEmpty(mailSubject) && !string.IsNullOrEmpty(mailBody))
+                {
+                    if (IsValidEmailInput(toEmail))
+                    {
+
+                        if (!await SendSparkPostEmail(toEmail, mailSubject, mailBody))
+                        {
+                            if (!SendMailGunEmail(toEmail, mailSubject, mailBody))
                             {
-                                if (isTokenExpire)
+
+
+                                if (!await SendEmail(toEmail, mailSubject, mailBody))
                                 {
-                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "SessionExpire", "SessionExpire();", true);
+                                    if (isTokenExpire)
+                                    {
+                                        Page.ClientScript.RegisterStartupScript(this.GetType(), "SessionExpire", "SessionExpire();", true);
+                                    }
+                                    else
+                                    {
+                                        //failure in sending mail from all email api
+
+                                        Page.ClientScript.RegisterStartupScript(this.GetType(), "failureMail", "failureMail();", true);
+                                    }
                                 }
                                 else
                                 {
-                                    //failure in sending mail from all email api
-
-                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "failureMail", "failureMail();", true);
+                                    Page.ClientScript.RegisterStartupScript(this.GetType(), "successMail", "successMail();", true);
                                 }
+
                             }
                             else
                             {
+
                                 Page.ClientScript.RegisterStartupScript(this.GetType(), "successMail", "successMail();", true);
+
                             }
-                            
                         }
                         else
                         {
-                            
+                            //mail send sucessfully using SparkPost
+
                             Page.ClientScript.RegisterStartupScript(this.GetType(), "successMail", "successMail();", true);
-                            
+
                         }
+
+
                     }
                     else
                     {
-                        //mail send sucessfully using SparkPost
-
-                        Page.ClientScript.RegisterStartupScript(this.GetType(), "successMail", "successMail();", true);
-                       
+                        //loginHide
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "loginHide", "loginHide();", true);
                     }
-
-                   
                 }
                 else
                 {
-                    //loginHide
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "loginHide", "loginHide();", true);
                 }
             }
-            else
+            catch (HttpRequestValidationException ex)
             {
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "loginHide", "loginHide();", true);
-            }
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "loginHideOnSpecial", "loginHideOnSpecial();", true);
 
-            BtnSubmitId.Disabled = false;
+                div_email_validation_msg.InnerText = "Special Characters Not Allowed";
+                div_email_validation_msg.Attributes.Add("style", "display:block");
+
+
+                // document.getElementById("div_email_validation_msg").style.display = "block";
+                // document.getElementById("div_email_validation_msg").innerText = "Email Field Is Required";
+
+
+            }
+            finally
+            {
+                BtnSubmitId.Disabled = false;
+            }
 
         }
         #endregion
@@ -222,6 +241,7 @@ namespace EmailSendApi.View
                     WebServiceUtil.MailToken = response.data.token;
 
                     divLogout.Attributes.Add("style", "display:block");
+                    div_email_validation_msg.Attributes.Add("style", "display:none");
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "loginClick", "loginClick();", true);
 
                 }
@@ -248,25 +268,35 @@ namespace EmailSendApi.View
         {
             login_id.Disabled = true;
 
-            string username = String.Format("{0}", Request.Form["userNametxt"]);
-            string password = String.Format("{0}", Request.Form["userPasstxt"]);
-
-            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            try
             {
+                string username = String.Format("{0}", Request.Form["userNametxt"]);
+                string password = String.Format("{0}", Request.Form["userPasstxt"]);
 
-                div_login_failure.InnerText = "Invalid username or password";
+                if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+                {
+
+                    div_login_failure.InnerText = "Invalid username or password";
+                    div_login_failure.Attributes.Add("style", "display:block");
+                    div_login_failure.Attributes.Add("class", "alert alert-danger text-center");
+
+                    divLogout.Attributes.Add("style", "display:none");
+
+
+                }
+                else
+                {
+                    await PerformLogin(username, password);
+                }
+            }
+            catch (HttpRequestValidationException ex)
+            {
+                div_login_failure.InnerText = "Special Characters Not Allowed";
                 div_login_failure.Attributes.Add("style", "display:block");
                 div_login_failure.Attributes.Add("class", "alert alert-danger text-center");
 
                 divLogout.Attributes.Add("style", "display:none");
-
-
             }
-            else
-            {
-               await PerformLogin(username, password);
-            }
-
 
             login_id.Disabled = false;
         }
@@ -296,41 +326,55 @@ namespace EmailSendApi.View
         protected async void signup_id_ServerClick(object sender, EventArgs e)
         {
             signup_id.Disabled = true;
-
-            string user = String.Format("{0}", Request.Form["userNametxtSignUp"]);
-            string pass = String.Format("{0}", Request.Form["userPasstxtSignUp"]);
-            string email = String.Format("{0}", Request.Form["toEmailSignUp"]);
-
-            if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(email))
+            
+            try
             {
-                if(IsValidEmailInput(email))
+                string user = String.Format("{0}", Request.Form["userNametxtSignUp"]);
+                string pass = String.Format("{0}", Request.Form["userPasstxtSignUp"]);
+                string email = String.Format("{0}", Request.Form["toEmailSignUp"]);
+
+                if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(email))
                 {
+                    if(IsValidEmailInput(email))
+                    {
 
 
-                    await SignUpService(user, pass, email);
+                        await SignUpService(user, pass, email);
+                    }
+                    else
+                    {
+                        div_signup_failed.InnerText = "Invalid Email Id";
+                        div_signup_failed.Attributes.Add("style", "display:block");
+                        divLogout.Attributes.Add("style", "display:none");
+
+                        Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
+                    }
+
                 }
                 else
                 {
-                    div_signup_failed.InnerText = "Invalid Email Id";
+
+                    div_signup_failed.InnerText = "All Fields Are Required";
                     div_signup_failed.Attributes.Add("style", "display:block");
                     divLogout.Attributes.Add("style", "display:none");
 
                     Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
+
                 }
-
             }
-            else
+            catch (HttpRequestValidationException ex)
             {
+                div_signup_failed.InnerText = "Special Characters Not Allowed";
+                    div_signup_failed.Attributes.Add("style", "display:block");
+                    divLogout.Attributes.Add("style", "display:none");
 
-                div_signup_failed.InnerText = "All Fields Are Required";
-                div_signup_failed.Attributes.Add("style", "display:block");
-                divLogout.Attributes.Add("style", "display:none");
-
-                Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
 
             }
-
-            signup_id.Disabled =false;
+            finally
+            {
+                signup_id.Disabled =false;
+            }
 
         }
 

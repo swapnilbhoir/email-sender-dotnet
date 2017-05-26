@@ -22,14 +22,13 @@
     <title>Email Service</title>
    
 </head>
-<body>
-    
+<body>    
             <!-- Container Start -->
 
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" method="post">
         
 
-		<div class="container">
+		    <div class="container">
 			<div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-12 col-xs-12 loginSection">
 				<div class="row text-center">
 					<h3 class="messagetxt">Log In</h3>
@@ -140,15 +139,13 @@
 
 			</div>
 
-
-
             <div id="divLogout" runat="server" style="display:none;" class="row" >
                 <div class="col-lg-12 col-md-12 colsm-12 colxs-12 text-right logOutSection">
                     <a href="#" class="logoutBtn"  >Logout</a>
                 </div>
             </div>
 
-			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 enterEmail">
+			<%--<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 enterEmail">
 				<div class="row">
 					<div class="col-lg-12 text-center">
 						<h3 class="messagetxt">Welcome to email platform</h3>
@@ -167,7 +164,7 @@
 						<span class="downArrow"><img src="../images/down-arow.png" /></span>
 					</div>
 				</div>
-			</div>
+			</div>--%>
 
 			<div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-12 col-xs-12 sendEmail">
 				<div class="row text-center">
@@ -268,11 +265,7 @@
 				</div>
 			</div>
 
-           
-
-
-
-		</div>
+           		
 		<!-- Container End -->
 
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script> 
@@ -280,8 +273,9 @@
 
             function loginClick() {
                 
-                $(".loginSection").slideUp(500);
-                $(".enterEmail").delay(500).slideDown(500);
+                $(".loginSection").slideUp(500);               
+                $(".sendEmail").delay(500).slideDown(500);
+                $('#div').show(0).delay(5000).hide(0);
                 $(".loginSection").hide(0);
             }
 
@@ -292,6 +286,12 @@
                                
             }
            
+
+            function loginHideOnSpecial() {
+                $(".loginSection").hide(0);
+                $(".sendEmail").delay(2000).slideDown(500);
+
+            }
            
             function loading() {
                 $(".loginSection").hide(0);
@@ -325,8 +325,8 @@
             function successMail()
             {
                 $(".loginSection").hide(0);
-                $(".emailloading").slideUp(500);;
-                $(".emailSuccess").delay(2000).slideDown(500);
+                $(".emailloading").slideUp(500);
+                $(".emailSuccess").delay(3000).slideDown(500);
                
             }
 
@@ -334,7 +334,7 @@
             {
                 $(".loginSection").hide(0);
                 $(".emailloading").slideUp(500);;
-                $(".emailfailure").delay(2000).slideDown(500);
+                $(".emailfailure").delay(3000).slideDown(500);
             }
 
             function Validate()
@@ -481,21 +481,12 @@
          </script>
 
 
-        
-            
-
         </form>
 
      
-
-
-   <%-- </form>--%>
-
     <script src="../js/jquery-3.2.1.js"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/script.js"></script>
-
-
    
 </body>
 </html>
