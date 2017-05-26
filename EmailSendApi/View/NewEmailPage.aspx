@@ -52,12 +52,27 @@
 						</div>
 						<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
-								<button type="submit"  class="col-lg-4 col-md-4 btn btn-primary btn-login" runat="server" id="login_id" name="login_id" onserverclick="login_id_ServerClick" >Login</button>
-
+								<button type="submit"  class="col-lg-4 col-md-4 col-sm-4 col-xs-4 btn btn-primary btn-login" runat="server" id="login_id" name="login_id" onserverclick="login_id_ServerClick" >Login</button>
+                               <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right SignUpBtnSection" >
+                                 <a href="#" class="signUpLink"  >Sign Up</a>
+                                 </div>
                                <%-- <asp:Button  class="col-lg-4 col-md-4 btn btn-primary btn-login" runat="server" id="loginid" name="loginid" Text="login"   OnClick="login_Click"  />--%>
 
 							</div>
 						</div>
+                    
+                     <%--<div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+                            <div class="alert alert-danger text-center" style="display:none" role="alert" id="div1" runat="server" >Login Failed</div>
+                        </div>
+                     </div>--%>
+
+                    <div id="div1" runat="server" style="display:none;" class="row" >
+                        <div class="col-lg-12 col-md-12 colsm-12 colxs-12 text-right logOutSection">
+                            <a href="#" class="logoutBtn"  >Logout</a>
+                        </div>
+                    </div>
+
 
                     <%--<div class="row">&nbsp; </div>--%>
                     <div class="row">
@@ -69,6 +84,63 @@
 					<%--</form>--%>
 				</div>
 			</div>
+
+            <div class="col-lg-4 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-12 col-xs-12 signUpSection">
+				<div class="row text-center">
+					<h3 class="messagetxt">Sign Up</h3>
+				</div>
+
+				<div class="loginCard">
+					<%--<form name="emailForm"  method="post" id="loginForm">--%>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+								<div class="form-group">
+									<input type="text" class="form-control" name="userNametxtSignUp" id="userNametxtSignUp" placeholder="User name" onkeydown="SignUpValidate()" required="required" onblur="NameValidateOnBlur()"  />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+								<div class="form-group">
+									<input type="password" class="form-control" name="userPasstxtSignUp" id="userPasstxtSignUp" placeholder="Password" onkeydown="SignUpValidate()" required="required" onblur="PasswordValidateOnBlur()"/>
+								</div>
+							</div>
+						</div>
+
+                        <div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+								<div class="form-group">
+             
+									<input type="email" class="form-control"  name="toEmailSignUp" id="toEmailSignUp" placeholder="Email"  required="required"   onkeydown="SignUpValidate()" onblur="SignUpEmailValidateOnBlur()"/>                        
+
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+								<button type="submit" disabled="disabled"  class="col-lg-4 col-md-4 btn btn-primary btn-login" runat="server" id="signup_id" name="signup_id" onserverclick="signup_id_ServerClick" >Signup</button>
+                                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8 text-right GoBackBtnSection" >
+                                 <a href="#" class="signUpLink">Go Back</a>
+                                 </div>
+							</div>
+						</div>
+
+                   
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12 col-sm-12 colxs-12">
+                            <div class="alert alert-danger text-center" style="display:none" role="alert" id="div_signup_failed" runat="server" >Signup Failed</div>
+                        </div>
+                     </div>
+                       
+			
+				</div>
+			</div>
+
+
+			</div>
+
+
 
             <div id="divLogout" runat="server" style="display:none;" class="row" >
                 <div class="col-lg-12 col-md-12 colsm-12 colxs-12 text-right logOutSection">
@@ -88,7 +160,7 @@
 					</div>
 
 					<div class="row text-center proceedSection">
-						<span class="cardHeadMess">Welcome to our email sending panel. Please click on the down arrow below the email icon to proceed further.</span>
+						<span class="cardHeadMess">Try out our email panel. Please click on the down arrow below the email icon to proceed further.</span>
 					</div>
 					
 					<div class="row text-center downArrowSection">
@@ -190,7 +262,7 @@
 					<div class="loader text-center">
 						<img src="../images/loading.gif"  />
                         <br />
-                        <span>Processing...</span>
+                        <span>Kindly Wait, Processing...</span>
 					</div>
 
 				</div>
@@ -221,12 +293,21 @@
             }
            
            
-
             function loading() {
                 $(".loginSection").hide(0);
                 $(".sendEmail").slideUp(500);
                 $(".emailloading").delay(500).slideDown(500);
              
+            }
+
+            function signUpSuccess () {               
+                $(".signUpSection").slideUp(500);
+                $(".loginSection").slideDown(500);
+            };
+
+           function stayOnSignUp () {
+                $(".loginSection").slideUp(500);
+                $(".signUpSection").slideDown(500);
             }
 
             function SessionExpire() {
@@ -245,7 +326,7 @@
             {
                 $(".loginSection").hide(0);
                 $(".emailloading").slideUp(500);;
-                $(".emailSuccess").delay(1500).slideDown(500);
+                $(".emailSuccess").delay(2000).slideDown(500);
                
             }
 
@@ -253,7 +334,7 @@
             {
                 $(".loginSection").hide(0);
                 $(".emailloading").slideUp(500);;
-                $(".emailfailure").delay(1500).slideDown(500);
+                $(".emailfailure").delay(2000).slideDown(500);
             }
 
             function Validate()
@@ -325,6 +406,65 @@
                     document.getElementById("div_email_validation_msg").style.display = "none";
                 }
             }
+
+
+            function SignUpValidate() {
+                if (document.getElementById("toEmailSignUp").value == "" || document.getElementById("userNametxtSignUp").value == "" || document.getElementById("userPasstxtSignUp").value == "") {
+                    document.getElementById("signup_id").disabled = true;
+                }
+                else {
+                    if (validateEmail(document.getElementById("toEmailSignUp").value)) {
+                        document.getElementById("div_signup_failed").style.display = "none";
+                        document.getElementById("signup_id").disabled = false;
+                    }
+                    else {
+                        document.getElementById("signup_id").disabled = true;
+                    }
+                }
+
+            }
+
+
+
+            function SignUpEmailValidateOnBlur() {
+                if (document.getElementById("toEmailSignUp").value == "") {
+                    document.getElementById("div_signup_failed").style.display = "block";
+                    document.getElementById("div_signup_failed").innerText = "Email Field Is Required";
+
+                }
+                else if (!validateEmail(document.getElementById("toEmailSignUp").value)) {
+
+                    document.getElementById("div_signup_failed").style.display = "block";
+                    document.getElementById("div_signup_failed").innerText = "Kindly Provide Proper Email Id";
+                }
+                else {
+                    document.getElementById("div_signup_failed").style.display = "none";
+                }
+
+            }
+
+
+            function NameValidateOnBlur() {
+                if (document.getElementById("userNametxtSignUp").value == "") {
+                    document.getElementById("div_signup_failed").style.display = "block";
+                    document.getElementById("div_signup_failed").innerText = "Name Is Required";
+                }
+                else {
+                    document.getElementById("div_signup_failed").style.display = "none";
+                }
+            }
+
+
+            function PasswordValidateOnBlur() {
+                if (document.getElementById("userPasstxtSignUp").value == "") {
+                    document.getElementById("div_signup_failed").style.display = "block";
+                    document.getElementById("div_signup_failed").innerText = "Password Is Required";
+                }
+                else {
+                    document.getElementById("div_signup_failed").style.display = "none";
+                }
+            }
+
 
 
             function validateEmail(email)

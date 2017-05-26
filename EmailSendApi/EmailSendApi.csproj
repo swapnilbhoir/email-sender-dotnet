@@ -87,6 +87,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CONTRIBUTORS.txt" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
     <Content Include="css\bootstrap.css" />
@@ -116,6 +117,7 @@
     <Compile Include="Model\Response\EmailerResponse.cs" />
     <Compile Include="Model\Response\LoginResponse.cs" />
     <Compile Include="Model\Response\SendGridEmailResponse.cs" />
+    <Compile Include="Model\Response\SignUpResponse.cs" />
     <Compile Include="Model\WebServiceUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="View\NewEmailPage.aspx.cs">

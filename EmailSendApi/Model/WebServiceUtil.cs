@@ -25,6 +25,7 @@ namespace EmailSender
         public static string LoginUrl = "http://10.40.12.205:3000/user/signin";
         public static string MailToken = "";
         public static string MailUrl = "http://10.40.12.205:3000/v1/mailer/sendmail";
+        public static string SignUpUrl = "http://10.40.12.205:3000/user/signup";
         #endregion
 
         #region SparkPostApi
@@ -98,6 +99,34 @@ namespace EmailSender
                 try
                 {
                     response = JsonConvert.DeserializeObject<LoginResponse>(result);
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.StackTrace);
+                }
+            }
+
+            return response;
+        }
+        #endregion
+
+        #region signup
+        public static async Task<SignUpResponse> SignUp(string username, string password,string email)
+        {
+            SignUpResponse response = null;
+            Dictionary<string, string> param = new Dictionary<string, string>();
+            param.Add("username", username);
+            param.Add("password", password);
+            param.Add("email", email);
+            string data = JsonConvert.SerializeObject(param);
+            System.Diagnostics.Debug.WriteLine(data);
+            string result = await PostAsync(data, "", SignUpUrl, false, false);
+
+            if (!string.IsNullOrEmpty(result))
+            {
+                try
+                {
+                    response = JsonConvert.DeserializeObject<SignUpResponse>(result);
                 }
                 catch (Exception e)
                 {

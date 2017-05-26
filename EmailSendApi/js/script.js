@@ -7,6 +7,18 @@ $( document ).ready(function() {
     });
 
 
+    $(".SignUpBtnSection").click(function () {
+        $(".loginSection").slideUp(500);
+        $(".signUpSection").slideDown(500);
+    } );
+
+    
+
+    $(".GoBackBtnSection").click(function () {
+        $(".signUpSection").slideUp(500);
+        $(".loginSection").slideDown(500);
+        
+    });
 	
     $(".downArrow").click(function(){
 		$(".enterEmail").slideUp(500);

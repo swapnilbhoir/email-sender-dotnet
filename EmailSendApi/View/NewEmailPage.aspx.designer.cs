@@ -31,6 +31,15 @@ namespace EmailSendApi.View {
         protected global::System.Web.UI.HtmlControls.HtmlButton login_id;
         
         /// <summary>
+        /// div1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div1;
+        
+        /// <summary>
         /// div_login_failure control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,24 @@ namespace EmailSendApi.View {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_login_failure;
+        
+        /// <summary>
+        /// signup_id control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton signup_id;
+        
+        /// <summary>
+        /// div_signup_failed control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_signup_failed;
         
         /// <summary>
         /// divLogout control.

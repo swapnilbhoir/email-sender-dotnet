@@ -13,6 +13,7 @@ body{
 	font-weight: 500;
 	color: #ffffff;
 	margin: 1em 0 0.5em 0;
+    text-shadow: 1px 1px 1px #000;
 }
 
 /* Text message inside the card style */
@@ -34,6 +35,7 @@ body{
 
 .downArrowSection{
 	margin-top: 3.5em;
+    margin-bottom:4em;
 }
 
 /* Go to send email icon css styling */
@@ -100,6 +102,11 @@ body{
 	min-height: 150px;
 }
 
+
+.signUpSection{
+    margin-top:5em;
+}
+
 /* Overwriting default bootstrap form styling */
 
 .form-control{
@@ -132,10 +139,27 @@ body{
 	display: none;
 }
 
+/* hiding signup card */
+.signUpSection{
+    display:none;
+}
+
 /* hiding send email card */
 
 .sendEmail{
 	display: none;
+}
+
+/* Signup Button Style */
+.SignUpBtnSection
+{
+    padding-top:0.6em;
+}
+
+/* GoBAck Button Style */
+.GoBackBtnSection
+{
+    padding-top:0.6em;
 }
 
 /* hiding successfull message card */
@@ -218,7 +242,7 @@ body{
 /* logout section styling */
 
 .logOutSection{
-    padding: 1em 0 1em 0;
+    padding: 1em 2em 1em 0;
 }
 
 /* Logout button styling */
@@ -229,6 +253,13 @@ body{
     font-size: 1.1em;
     text-decoration: none;
     font-weight: 100;
+}
+
+
+
+.signUpLink{
+    color:#506CD8 !important;
+    margin-top: 1em;
 }
 
 /* Logout button hover styling */
@@ -252,4 +283,8 @@ body{
 
 .loader{
     margin-top:7em;
+}
+
+.alert{
+    margin-top:1em;
 }

@@ -229,6 +229,7 @@ namespace EmailSendApi.View
                 {
                     div_login_failure.InnerText = response.msg;
                     div_login_failure.Attributes.Add("style", "display:block");
+                    div_login_failure.Attributes.Add("class", "alert alert-danger text-center");
                     divLogout.Attributes.Add("style", "display:none");
                 }
             }
@@ -236,6 +237,7 @@ namespace EmailSendApi.View
             {
                 div_login_failure.InnerText = "No Response From Server";
                 divLogout.Attributes.Add("style", "display:none");
+                div_login_failure.Attributes.Add("class", "alert alert-danger text-center");
                 div_login_failure.Attributes.Add("style", "display:block");
             }
 
@@ -254,7 +256,11 @@ namespace EmailSendApi.View
 
                 div_login_failure.InnerText = "Invalid username or password";
                 div_login_failure.Attributes.Add("style", "display:block");
+                div_login_failure.Attributes.Add("class", "alert alert-danger text-center");
+
                 divLogout.Attributes.Add("style", "display:none");
+
+
             }
             else
             {
@@ -281,6 +287,91 @@ namespace EmailSendApi.View
                 }
 
                 return result;
+        }
+
+        #endregion
+
+        #region SignUp
+
+        protected async void signup_id_ServerClick(object sender, EventArgs e)
+        {
+            signup_id.Disabled = true;
+
+            string user = String.Format("{0}", Request.Form["userNametxtSignUp"]);
+            string pass = String.Format("{0}", Request.Form["userPasstxtSignUp"]);
+            string email = String.Format("{0}", Request.Form["toEmailSignUp"]);
+
+            if (!string.IsNullOrEmpty(user) && !string.IsNullOrEmpty(pass) && !string.IsNullOrEmpty(email))
+            {
+                if(IsValidEmailInput(email))
+                {
+
+
+                    await SignUpService(user, pass, email);
+                }
+                else
+                {
+                    div_signup_failed.InnerText = "Invalid Email Id";
+                    div_signup_failed.Attributes.Add("style", "display:block");
+                    divLogout.Attributes.Add("style", "display:none");
+
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
+                }
+
+            }
+            else
+            {
+
+                div_signup_failed.InnerText = "All Fields Are Required";
+                div_signup_failed.Attributes.Add("style", "display:block");
+                divLogout.Attributes.Add("style", "display:none");
+
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
+
+            }
+
+            signup_id.Disabled =false;
+
+        }
+
+
+        private async Task<bool> SignUpService(string user,string pass,string email)
+        {
+            bool result=false;
+
+            SignUpResponse response=await WebServiceUtil.SignUp(user,pass,email);
+
+            if(response!=null)
+            {
+                if(response.code==2000)
+                {
+                    result = true;
+                    div_signup_failed.Attributes.Add("style", "display:none");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "signUpSuccess", "signUpSuccess();", true);
+                    div_login_failure.InnerText = "Sign Up Sucessfull";
+                    div_login_failure.Attributes.Add("style", "display:block");
+                     div_login_failure.Attributes.Add("class", "alert-success alert");
+                  
+                    divLogout.Attributes.Add("style", "display:none");
+                }
+                else
+                {
+                    div_signup_failed.InnerText = response.msg;
+                    div_signup_failed.Attributes.Add("style", "display:block");
+                    divLogout.Attributes.Add("style", "display:none");
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
+                }
+            }
+            else
+            {
+                div_signup_failed.InnerText = "No Response From Server";
+                div_signup_failed.Attributes.Add("style", "display:block");
+                divLogout.Attributes.Add("style", "display:none");
+
+                Page.ClientScript.RegisterStartupScript(this.GetType(), "stayOnSignUp", "stayOnSignUp();", true);
+            }
+
+            return result;
         }
 
         #endregion
